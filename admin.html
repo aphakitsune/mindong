@@ -1727,12 +1727,30 @@
             .catch(err => alert("Lỗi kết nối máy chủ!"));
         }
 
-        function deleteCustomerFromServer(id) {
-            if (!id) return;
-            if (confirm("Bạn có chắc chắn muốn xóa vĩnh viễn khách hàng này không?")) {
-                alert("Yêu cầu xóa khách hàng ID: " + id);
+        // MỚI ĐÃ ĐƯỢC CẬP NHẬT:
+function deleteCustomerFromServer(id) {
+    if (!id) return;
+    
+    if (confirm("Bạn có chắc chắn muốn xóa vĩnh viễn khách hàng này khỏi cơ sở dữ liệu không?")) {
+        // Gửi yêu cầu DELETE lên server Node.js
+        fetch(`/api/customers/${id}`, {
+            method: 'DELETE'
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("Đã xóa khách hàng thành công khỏi database Neon!");
+                loadCustomersFromServer(); // Tải lại bảng danh sách để cập nhật giao diện
+            } else {
+                alert(data.message || "Lỗi không thể xóa khách hàng!");
             }
-        }
+        })
+        .catch(error => {
+            console.error("Lỗi khi kết nối API xóa:", error);
+            alert("Không thể kết nối đến server để thực hiện lệnh xóa!");
+        });
+    }
+}
 
         function adminLogout() { window.location.href = 'index.html'; }
     </script>

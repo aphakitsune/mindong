@@ -176,6 +176,25 @@ app.post('/api/config', async (req, res) => {
     }
 });
 
+// ==========================================
+// API XÓA KHÁCH HÀNG KHỎI DATABASE NEON
+// ==========================================
+app.delete('/api/customers/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        
+        // Thực hiện lệnh xóa trong database dựa vào ID
+        await prisma.customer.delete({
+            where: { id: parseInt(id) }
+        });
+
+        res.json({ success: true, message: 'Đã xóa khách hàng thành công!' });
+    } catch (error) {
+        console.error("Lỗi khi xóa khách hàng:", error);
+        res.status(500).json({ success: false, message: 'Lỗi không thể xóa khách hàng khỏi database!' });
+    }
+});
+
 
 // Mở cổng lắng nghe Server
 app.listen(PORT, () => {
