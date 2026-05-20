@@ -1,0 +1,1740 @@
+<!-- <!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindong - Quản trị hệ thống</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: #fdf8f9; /* Nền trắng hồng nhẹ nhàng */
+            color: #4a4a4a;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Khung chứa toàn bộ trang Dashboard */
+        .dashboard-container {
+            width: 100%;
+            max-width: 1100px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(255, 161, 181, 0.1);
+            padding: 24px;
+            border: 1px solid rgba(255, 161, 181, 0.2);
+        }
+
+        /* --- HEADER HỆ THỐNG --- */
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 16px;
+            border-bottom: 1px dashed #fcd1d9;
+            margin-bottom: 20px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background-color: #f793a6; /* Màu hồng thương hiệu Mindong */
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+        }
+
+        .logo-text h1 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #e56b82; /* Tông chữ hồng đậm đà */
+            letter-spacing: 0.5px;
+        }
+
+        .logo-text span {
+            font-size: 11px;
+            color: #a6999b;
+            display: block;
+            margin-top: 2px;
+        }
+
+        .user-nav {
+            display: flex;
+            gap: 20px;
+            font-size: 13px;
+            color: #6e6566;
+        }
+
+        .nav-item {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.2s;
+        }
+
+        .nav-item:hover {
+            color: #f793a6;
+        }
+
+        /* --- BANNER THÔNG TIN CHUNG --- */
+        .main-banner {
+            background: linear-gradient(90deg, #f793a6, #e56b82); /* Gradient tone hồng mượt mà */
+            color: white;
+            padding: 18px 24px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 12px rgba(229, 107, 130, 0.2);
+        }
+
+        .banner-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .banner-icon {
+            font-size: 24px;
+            opacity: 0.95;
+        }
+
+        .banner-title h2 {
+            font-size: 14px;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        .banner-title p {
+            font-size: 16px;
+            font-weight: 700;
+            margin-top: 2px;
+            letter-spacing: 0.3px;
+        }
+
+        .btn-edit-main {
+            background: rgba(255, 255, 255, 0.22);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.2s;
+        }
+
+        .btn-edit-main:hover {
+            background: rgba(255, 255, 255, 0.35);
+        }
+
+        /* --- KHỐI THỐNG KÊ SỐ LIỆU --- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: #ffffff;
+            border: 1px solid #fcd1d9;
+            border-radius: 12px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 4px 10px rgba(229, 107, 130, 0.02);
+        }
+
+        .stat-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+        }
+
+        /* Đổi các box icon thống kê sang phối màu hồng đồng điệu */
+        .icon-pink-light { background: #fff0f2; color: #e56b82; }
+        .icon-pink-medium { background: #ffe4e8; color: #f793a6; }
+        .icon-pink-dark { background: #ffd0d7; color: #c0392b; }
+
+        .stat-info p {
+            font-size: 12px;
+            color: #a6999b;
+            font-weight: 500;
+        }
+
+        .stat-info h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333333;
+            margin-top: 4px;
+        }
+
+        .stat-info h3.text-highlight { color: #e56b82; }
+
+        /* --- THANH ĐIỀU KHIỂN DANH SÁCH --- */
+        .list-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .toolbar-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #4a4a4a;
+        }
+
+        .toolbar-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-action {
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.2s;
+        }
+
+        .btn-muted {
+            background-color: #fff0f2;
+            color: #e56b82;
+            border: 1px solid #fcd1d9;
+        }
+        .btn-muted:hover { background-color: #ffe4e8; }
+
+        .btn-pink {
+            background-color: #f793a6;
+            color: white;
+            box-shadow: 0 4px 10px rgba(247, 147, 166, 0.25);
+        }
+        .btn-pink:hover { background-color: #e56b82; }
+
+        /* --- BẢNG DỮ LIỆU KHÁCH HÀNG --- */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 13px;
+        }
+
+        th {
+            background-color: #fff8f9;
+            color: #a6999b;
+            font-weight: 600;
+            padding: 14px 16px;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid #fcd1d9;
+        }
+
+        td {
+            padding: 16px;
+            border-bottom: 1px dashed #fde2e7;
+            color: #4a4a4a;
+            vertical-align: middle;
+        }
+
+        tr:hover td {
+            background-color: #fffcfd;
+        }
+
+        /* Ô trống dữ liệu thiết kế tinh tế */
+        .empty-placeholder {
+            color: #d1cbd2;
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        /* Cột hành động (Icons Thao Tác) */
+        .action-icons {
+            display: flex;
+            gap: 14px;
+            font-size: 15px;
+        }
+
+        .icon-btn {
+            cursor: pointer;
+            transition: transform 0.2s, color 0.2s;
+        }
+        .icon-btn:hover {
+            transform: scale(1.1);
+        }
+        .icon-edit { color: #f793a6; }
+        .icon-edit:hover { color: #e56b82; }
+        
+        .icon-calendar { color: #e67e22; }
+        .icon-calendar:hover { color: #d35400; }
+        
+        .icon-delete { color: #95a5a6; }
+        .icon-delete:hover { color: #c0392b; }
+
+        /* Tinh chỉnh hiển thị số điện thoại */
+        .phone-badge {
+            background-color: #f5f6fa;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-weight: 500;
+            color: #57606f;
+        }
+
+        /* ==================== CSS CHO FORM POPUP MỚI ==================== */
+        .custom-modal {
+            display: none; 
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: #ffffff;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            animation: fadeInModal 0.3s ease;
+        }
+
+        @keyframes fadeInModal {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid #fff1f3;
+        }
+
+        .modal-header h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .close-modal-btn {
+            font-size: 24px;
+            color: #aaa;
+            cursor: pointer;
+        }
+        .close-modal-btn:hover { color: #e56b82; }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .form-group-item {
+            margin-bottom: 15px;
+        }
+
+        .form-group-item label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .form-group-item input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #e2e2e2;
+            border-radius: 6px;
+            font-size: 13.5px;
+            font-family: 'Montserrat', sans-serif;
+            outline: none;
+        }
+
+        .form-group-item input:focus {
+            border-color: #e56b82;
+            box-shadow: 0 0 5px rgba(229, 107, 130, 0.1);
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            padding: 15px 20px;
+            border-top: 1px solid #fff1f3;
+        }
+
+        .btn-modal-cancel {
+            padding: 9px 15px;
+            background: #f4f4f4;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            color: #666;
+        }
+
+        .btn-modal-submit {
+            padding: 9px 15px;
+            background: #e56b82;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            color: #fff;
+        }
+        .btn-modal-submit:hover { background: #d4566d; }
+    </style>
+</head>
+
+<body>
+    
+    <div id="addCustomerModal" class="custom-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Thêm khách hàng mới</h3>
+                <span class="close-modal-btn" onclick="closeCustomerModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="edit-id" value="">
+
+                <div class="form-group-item">
+                    <label>Họ và tên:</label>
+                    <input type="text" id="input-name" placeholder="Nguyễn Văn A">
+                </div>
+                <div class="form-group-item">
+                    <label>Số điện thoại (Bắt buộc):</label>
+                    <input type="text" id="input-phone" placeholder="0901234567">
+                </div>
+                <div class="form-group-item">
+                    <label>Số CMND/CCCD:</label>
+                    <input type="text" id="input-cccd" placeholder="079xxxxxxxx">
+                </div>
+                <div class="form-group-item">
+                    <label>Số tiền gốc giải ngân (đ):</label>
+                    <input type="number" id="input-goc" placeholder="0" value="0">
+                </div>
+                <div class="form-group-item">
+                    <label>Số tiền cần thanh toán (đ):</label>
+                    <input type="number" id="input-phaiTT" placeholder="0" value="0">
+                </div>
+                <div class="form-group-item">
+                    <label>Thời hạn thanh toán:</label>
+                    <input type="text" id="input-hanTT" placeholder="Ví dụ: 30 ngày">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-modal-cancel" onclick="closeCustomerModal()">Hủy bỏ</button>
+                <button class="btn-modal-submit" onclick="submitCustomerForm()">Lưu lại</button>
+            </div>
+        </div>
+    </div>
+    <div id="configModal" class="custom-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Chỉnh sửa thông tin doanh nghiệp & QR</h3>
+                <span class="close-modal-btn" onclick="closeConfigModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group-item">
+                    <label>Ngân hàng:</label>
+                    <input type="text" id="config-bankName" placeholder="Ví dụ: MB Bank">
+                </div>
+                <div class="form-group-item">
+                    <label>Số tài khoản thanh toán:</label>
+                    <input type="text" id="config-bankNumber" placeholder="Nhập số tài khoản">
+                </div>
+                <div class="form-group-item">
+                    <label>Tên chủ doanh nghiệp / Người thụ hưởng:</label>
+                    <input type="text" id="config-ownerName" placeholder="NGUYEN VAN A">
+                </div>
+                <div class="form-group-item">
+                    <label>Đường dẫn ảnh mã QR (URL Ảnh):</label>
+                    <input type="text" id="config-qrCodeUrl" placeholder="https://api.vietqr.io/image/...">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-modal-cancel" onclick="closeConfigModal()">Hủy bỏ</button>
+                <button class="btn-modal-submit" onclick="submitConfigForm()">Lưu cấu hình</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-container">
+        
+        <header class="dashboard-header">
+            <div class="logo-area">
+                <div class="logo-icon"><i class="fa-solid fa-heart"></i></div>
+                <div class="logo-text">
+                    <h1>Mindong</h1>
+                    <span>Quản trị hệ thống</span>
+                </div>
+            </div>
+            <div class="user-nav">
+                 <div class="nav-item" onclick="adminLogout()"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</div>
+            </div>
+        </header>
+
+        <div class="main-banner">
+            <div class="banner-left">
+                <div class="banner-icon"><i class="fa-regular fa-credit-card"></i></div>
+                <div class="banner-title">
+                    <h2>Thông tin thanh toán chung</h2>
+                    <p>Quản lý tài khoản & Mã QR</p>
+                </div>
+            </div>
+            <button class="btn-edit-main" onclick="openConfigModal()"><i class="fa-regular fa-pen-to-square"></i> Chỉnh sửa</button>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon icon-pink-light"><i class="fa-solid fa-users"></i></div>
+                <div class="stat-info">
+                    <p>Tổng khách hàng</p>
+                    <h3 id="total-customers">0</h3>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon icon-pink-medium"><i class="fa-solid fa-arrow-up-right-dots"></i></div>
+                <div class="stat-info">
+                    <p>Tổng tiền gốc</p>
+                    <h3 id="total-goc">0 ₫</h3>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon icon-pink-dark"><i class="fa-solid fa-sack-dollar"></i></div>
+                <div class="stat-info">
+                    <p>Tổng phải thanh toán</p>
+                    <h3 id="total-phai-tt" class="text-highlight">0 ₫</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="list-toolbar">
+            <div class="toolbar-title">Danh sách khách hàng</div>
+            <div class="toolbar-buttons">
+                <button class="btn-action btn-muted"><i class="fa-solid fa-file-excel"></i> Upload Excel</button>
+                <button class="btn-action btn-pink" onclick="addCustomerPrompt()"><i class="fa-solid fa-plus"></i> Thêm khách hàng</button>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 60px;">STT</th>
+                        <th>Khách hàng</th>
+                        <th>SĐT</th>
+                        <th>CCCD</th>
+                        <th>Tiền gốc</th>
+                        <th>Phải TT</th>
+                        <th>Hạn TT</th>
+                        <th style="width: 120px; text-align: center;">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody id="customer-table-body">
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <script>
+        // Mảng toàn cục lưu danh sách khách hàng phục vụ tính năng tìm kiếm / chỉnh sửa nhanh
+        let localCustomersArray = [];
+
+        // Khi vừa mở trang web, nạp dữ liệu từ Server PostgreSQL đám mây
+        document.addEventListener("DOMContentLoaded", function () {
+            loadCustomersFromServer();
+        });
+
+        // 1. Hàm lấy danh sách từ Server và hiển thị lên bảng HTML
+        function loadCustomersFromServer() {
+            fetch('/api/customers')
+            .then(response => response.json())
+            .then(customerList => {
+                localCustomersArray = customerList; // Lưu vào biến toàn cục
+                const tbody = document.getElementById("customer-table-body");
+                tbody.innerHTML = ""; 
+
+                let tongKhachHang = customerList.length;
+                let tongTienGoc = 0;
+                let tongPhaiTT = 0;
+
+                if (tongKhachHang === 0) {
+                    tbody.innerHTML = `
+                        <tr>
+                            <td>1</td>
+                            <td class="empty-placeholder">— Trống —</td>
+                            <td class="empty-placeholder">— Trống —</td>
+                            <td class="empty-placeholder">— Trống —</td>
+                            <td class="empty-placeholder">— Trống —</td>
+                            <td class="empty-placeholder">— Trống —</td>
+                            <td class="empty-placeholder">— Trống —</td>
+                            <td>
+                                <div class="action-icons" style="justify-content: center;">
+                                    <i class="fa-regular fa-pen-to-square icon-btn icon-edit" style="opacity: 0.3"></i>
+                                    <i class="fa-regular fa-calendar-days icon-btn icon-calendar" style="opacity: 0.3"></i>
+                                    <i class="fa-regular fa-trash-can icon-btn icon-delete" style="opacity: 0.3"></i>
+                                </div>
+                            </td>
+                        </tr>`;
+                    
+                    document.getElementById("total-customers").innerText = "0";
+                    document.getElementById("total-goc").innerText = "0 ₫";
+                    document.getElementById("total-phai-tt").innerText = "0 ₫";
+                    return;
+                }
+
+                customerList.forEach((customer, index) => {
+                    tongTienGoc += Number(customer.goc) || 0;
+                    tongPhaiTT += Number(customer.phaiTT) || 0;
+
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td style="font-weight: 600; color: #4a4a4a;">${customer.name || '—'}</td>
+                        <td><span class="phone-badge">${customer.phone}</span></td>
+                        <td>${customer.cccd || '—'}</td>
+                        <td style="font-weight: 600; color: #2ecc71;">${(Number(customer.goc) || 0).toLocaleString('vi-VN')} ₫</td>
+                        <td style="font-weight: 600; color: #e74c3c;">${(Number(customer.phaiTT) || 0).toLocaleString('vi-VN')} ₫</td>
+                        <td style="font-size: 13px; color: #7f8c8d;">${customer.hanTT || '—'}</td>
+                        <td>
+                            <div class="action-icons" style="justify-content: center;">
+                                <i class="fa-regular fa-pen-to-square icon-btn icon-edit" title="Chỉnh sửa" onclick="editCustomerPrompt(${index})"></i>
+                                <i class="fa-regular fa-calendar-days icon-btn icon-calendar" title="Lên lịch"></i>
+                                <i class="fa-regular fa-trash-can icon-btn icon-delete" title="Xóa" onclick="deleteCustomerFromServer(${customer.id})"></i>
+                            </div>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+
+                document.getElementById("total-customers").innerText = tongKhachHang;
+                document.getElementById("total-goc").innerText = tongTienGoc.toLocaleString('vi-VN') + " ₫";
+                document.getElementById("total-phai-tt").innerText = tongPhaiTT.toLocaleString('vi-VN') + " ₫";
+            })
+            .catch(error => {
+                console.error("Lỗi lấy danh sách khách hàng từ server:", error);
+            });
+        }
+
+        // 2. Hàm kích hoạt mở Form Modal ở chế độ THÊM MỚI
+        function addCustomerPrompt() {
+            document.getElementById("addCustomerModal").style.display = "flex";
+            document.getElementById("modal-title").innerText = "Thêm khách hàng mới";
+            document.getElementById("edit-id").value = ""; // Rỗng đồng nghĩa với thêm mới
+
+            document.getElementById("input-name").value = "";
+            document.getElementById("input-phone").value = "";
+            document.getElementById("input-cccd").value = "";
+            document.getElementById("input-goc").value = "0";
+            document.getElementById("input-phaiTT").value = "0";
+            document.getElementById("input-hanTT").value = "";
+        }
+
+        // 3. Hàm kích hoạt mở Form Modal ở chế độ CHỈNH SỬA
+        function editCustomerPrompt(index) {
+            const customer = localCustomersArray[index];
+            if (!customer) return;
+
+            document.getElementById("addCustomerModal").style.display = "flex";
+            document.getElementById("modal-title").innerText = "Chỉnh sửa thông tin khách hàng";
+            
+            // Lưu id thực của database vào thẻ hidden input phục vụ cập nhật đúng dòng
+            document.getElementById("edit-id").value = customer.id; 
+
+            // Điền toàn bộ thông tin hiện tại từ Database lên Form Modal
+            document.getElementById("input-name").value = customer.name || "";
+            document.getElementById("input-phone").value = customer.phone || "";
+            document.getElementById("input-cccd").value = customer.cccd || "";
+            document.getElementById("input-goc").value = customer.goc || 0;
+            document.getElementById("input-phaiTT").value = customer.phaiTT || 0;
+            document.getElementById("input-hanTT").value = customer.hanTT || "";
+        }
+
+        // 4. Hàm đóng Form popup
+        function closeCustomerModal() {
+            document.getElementById("addCustomerModal").style.display = "none";
+        }
+
+        // 5. Hàm xử lý khi bấm nút "Lưu lại" trên Form Modal (Hỗ trợ cả Thêm mới & Cập nhật dữ liệu)
+        function submitCustomerForm() {
+            const id = document.getElementById("edit-id").value;
+            const name = document.getElementById("input-name").value.trim() || "—";
+            const phone = document.getElementById("input-phone").value.trim();
+            const cccd = document.getElementById("input-cccd").value.trim() || "—";
+            const goc = document.getElementById("input-goc").value || "0";
+            const phaiTT = document.getElementById("input-phaiTT").value || "0";
+            const hanTT = document.getElementById("input-hanTT").value.trim() || "—";
+
+            if (!phone) {
+                alert("Vui lòng nhập Số điện thoại khách hàng!");
+                return;
+            }
+
+            const customerData = { name, phone, cccd, goc, phaiTT, hanTT };
+
+            if (id === "") {
+                // HÀM THÊM MỚI (POST)
+                fetch('/api/customers', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(customerData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert("Đã thêm khách hàng thành công vào database Neon!");
+                        closeCustomerModal();
+                        loadCustomersFromServer(); // Tải lại bảng dữ liệu mới nhất
+                    } else {
+                        alert(data.message || "Lỗi không thể thêm khách hàng!");
+                    }
+                })
+                .catch(error => {
+                    console.error("Lỗi POST:", error);
+                    alert("Không thể kết nối đến server Node.js!");
+                });
+            } else {
+                // CHỨC NĂNG SỬA ĐÃ HOÀN THIỆN (PUT): Gửi lệnh cập nhật trực tiếp lên Database Neon qua API Server
+                fetch(`/api/customers/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(customerData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert("Đã cập nhật dữ liệu lên Database Neon thành công!");
+                        closeCustomerModal();
+                        loadCustomersFromServer(); // Tải lại bảng dữ liệu mới nhất
+                    } else {
+                        alert(data.message || "Lỗi: Số điện thoại vừa sửa đã tồn tại!");
+                    }
+                })
+                .catch(error => {
+                    console.error("Lỗi cập nhật API PUT:", error);
+                    alert("Không thể kết nối đến hệ thống máy chủ để cập nhật dữ liệu!");
+                });
+            }
+        }
+
+        // 6. Hàm xóa khách hàng trực tiếp khỏi Database PostgreSQL đám mây
+        function deleteCustomerFromServer(id) {
+            if (!id) return;
+            if (confirm("Bạn có chắc chắn muốn xóa vĩnh viễn khách hàng này khỏi cơ sở dữ liệu không?")) {
+                alert("Hệ thống đã nhận lệnh xóa khách hàng ID: " + id);
+                // Sau này bạn có thể viết thêm app.delete('/api/customers/:id') ở server.js nếu cần xóa thực tế
+            }
+        }
+
+        // 7. Hàm đăng xuất hệ thống
+        function adminLogout() {
+            window.location.href = 'index.html';
+        }
+
+        // =========================================================
+        // XỬ LÝ CHỨC NĂNG CHỈNH SỬA TÀI KHOẢN QUẢN LÝ VÀ MÃ QR
+        // =========================================================
+
+        // Hàm mở popup cấu hình và tự động nạp dữ liệu cũ từ DB lên ô nhập
+        function openConfigModal() {
+            document.getElementById("configModal").style.display = "flex";
+            
+            // Lấy thông tin hiện tại từ Server để điền vào Form
+            fetch('/api/config')
+            .then(res => res.json())
+            .then(data => {
+                if (data) {
+                    document.getElementById("config-bankName").value = data.bankName || "";
+                    document.getElementById("config-bankNumber").value = data.bankNumber || "";
+                    document.getElementById("config-ownerName").value = data.ownerName || "";
+                    document.getElementById("config-qrCodeUrl").value = data.qrCodeUrl || "";
+                }
+            })
+            .catch(err => console.error("Không thể tải cấu hình cũ:", err));
+        }
+
+        // Hàm đóng popup cấu hình
+        function closeConfigModal() {
+            document.getElementById("configModal").style.display = "none";
+        }
+
+        // Hàm gửi dữ liệu cấu hình mới lên Server lưu lại
+        function submitConfigForm() {
+            const bankName = document.getElementById("config-bankName").value.trim();
+            const bankNumber = document.getElementById("config-bankNumber").value.trim();
+            const ownerName = document.getElementById("config-ownerName").value.trim();
+            const qrCodeUrl = document.getElementById("config-qrCodeUrl").value.trim();
+
+            if (!bankName || !bankNumber || !ownerName) {
+                alert("Vui lòng nhập đầy đủ các trường thông tin cơ bản!");
+                return;
+            }
+
+            const configData = { bankName, bankNumber, ownerName, qrCodeUrl };
+
+            fetch('/api/config', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(configData)
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Đã cập nhật cấu hình tài khoản doanh nghiệp thành công!");
+                    closeConfigModal();
+                } else {
+                    alert("Có lỗi xảy ra: " + data.message);
+                }
+            })
+            .catch(err => {
+                console.error("Lỗi POST Config:", err);
+                alert("Lỗi kết nối máy chủ để lưu cấu hình!");
+            });
+        }
+    </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindong - Quản trị hệ thống</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: #fdf8f9; /* Nền trắng hồng nhẹ nhàng */
+            color: #4a4a4a;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Khung chứa toàn bộ trang Dashboard */
+        .dashboard-container {
+            width: 100%;
+            max-width: 1100px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(255, 161, 181, 0.1);
+            padding: 24px;
+            border: 1px solid rgba(255, 161, 181, 0.2);
+        }
+
+        /* --- HEADER HỆ THỐNG --- */
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 16px;
+            border-bottom: 1px dashed #fcd1d9;
+            margin-bottom: 20px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background-color: #f793a6; /* Màu hồng thương hiệu Mindong */
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+        }
+
+        .logo-text h1 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #e56b82; /* Tông chữ hồng đậm đà */
+            letter-spacing: 0.5px;
+        }
+
+        .logo-text span {
+            font-size: 11px;
+            color: #a6999b;
+            display: block;
+            margin-top: 2px;
+        }
+
+        .user-nav {
+            display: flex;
+            gap: 20px;
+            font-size: 13px;
+            color: #6e6566;
+        }
+
+        .nav-item {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.2s;
+        }
+
+        .nav-item:hover {
+            color: #f793a6;
+        }
+
+        /* --- BANNER THÔNG TIN CHUNG --- */
+        .main-banner {
+            background: linear-gradient(90deg, #f793a6, #e56b82); /* Gradient tone hồng mượt mà */
+            color: white;
+            padding: 18px 24px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 12px rgba(229, 107, 130, 0.2);
+        }
+
+        .banner-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .banner-icon {
+            font-size: 24px;
+            opacity: 0.95;
+        }
+
+        .banner-title h2 {
+            font-size: 14px;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        .banner-title p {
+            font-size: 16px;
+            font-weight: 700;
+            margin-top: 2px;
+            letter-spacing: 0.3px;
+        }
+
+        .btn-edit-main {
+            background: rgba(255, 255, 255, 0.22);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.2s;
+        }
+
+        .btn-edit-main:hover {
+            background: rgba(255, 255, 255, 0.35);
+        }
+
+        /* --- KHỐI THỐNG KÊ SỐ LIỆU --- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: #ffffff;
+            border: 1px solid #fcd1d9;
+            border-radius: 12px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 4px 10px rgba(229, 107, 130, 0.02);
+        }
+
+        .stat-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+        }
+
+        .icon-pink-light { background: #fff0f2; color: #e56b82; }
+        .icon-pink-medium { background: #ffe4e8; color: #f793a6; }
+        .icon-pink-dark { background: #ffd0d7; color: #c0392b; }
+
+        .stat-info p {
+            font-size: 12px;
+            color: #a6999b;
+            font-weight: 500;
+        }
+
+        .stat-info h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333333;
+            margin-top: 4px;
+        }
+
+        .stat-info h3.text-highlight { color: #e56b82; }
+
+        /* --- THANH ĐIỀU KHIỂN DANH SÁCH --- */
+        .list-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .toolbar-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #4a4a4a;
+        }
+
+        .toolbar-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-action {
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.2s;
+        }
+
+        .btn-muted {
+            background-color: #fff0f2;
+            color: #e56b82;
+            border: 1px solid #fcd1d9;
+        }
+        .btn-muted:hover { background-color: #ffe4e8; }
+
+        .btn-pink {
+            background-color: #f793a6;
+            color: white;
+            box-shadow: 0 4px 10px rgba(247, 147, 166, 0.25);
+        }
+        .btn-pink:hover { background-color: #e56b82; }
+
+        /* --- BẢNG DỮ LIỆU KHÁCH HÀNG --- */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 13px;
+        }
+
+        th {
+            background-color: #fff8f9;
+            color: #a6999b;
+            font-weight: 600;
+            padding: 14px 16px;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid #fcd1d9;
+        }
+
+        td {
+            padding: 16px;
+            border-bottom: 1px dashed #fde2e7;
+            color: #4a4a4a;
+            vertical-align: middle;
+        }
+
+        tr:hover td {
+            background-color: #fffcfd;
+        }
+
+        .empty-placeholder {
+            color: #d1cbd2;
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        .action-icons {
+            display: flex;
+            gap: 14px;
+            font-size: 15px;
+        }
+
+        .icon-btn {
+            cursor: pointer;
+            transition: transform 0.2s, color 0.2s;
+        }
+        .icon-btn:hover { transform: scale(1.1); }
+        .icon-edit { color: #f793a6; }
+        .icon-edit:hover { color: #e56b82; }
+        .icon-calendar { color: #e67e22; }
+        .icon-calendar:hover { color: #d35400; }
+        .icon-delete { color: #95a5a6; }
+        .icon-delete:hover { color: #c0392b; }
+
+        .phone-badge {
+            background-color: #f5f6fa;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-weight: 500;
+            color: #57606f;
+        }
+
+        /* ==================== POPUP MODAL STYLES ==================== */
+        .custom-modal {
+            display: none; 
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: #ffffff;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            animation: fadeInModal 0.3s ease;
+        }
+
+        @keyframes fadeInModal {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid #fff1f3;
+        }
+
+        .modal-header h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .close-modal-btn {
+            font-size: 24px;
+            color: #aaa;
+            cursor: pointer;
+        }
+        .close-modal-btn:hover { color: #e56b82; }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .form-group-item {
+            margin-bottom: 15px;
+        }
+
+        .form-group-item label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .form-group-item input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #e2e2e2;
+            border-radius: 6px;
+            font-size: 13.5px;
+            font-family: 'Montserrat', sans-serif;
+            outline: none;
+        }
+
+        .form-group-item input:focus {
+            border-color: #e56b82;
+            box-shadow: 0 0 5px rgba(229, 107, 130, 0.1);
+        }
+
+        /* VÙNG KÉO THẢ ẢNH QR CODE ĐƯỢC CHỈNH SỬA MỚI */
+        .qr-dropzone {
+            border: 2px dashed #fcd1d9;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            background: #fffcfd;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        .qr-dropzone:hover, .qr-dropzone.dragover {
+            border-color: #e56b82;
+            background: #fff5f7;
+        }
+        .qr-dropzone i {
+            font-size: 28px;
+            color: #f793a6;
+            margin-bottom: 8px;
+        }
+        .qr-dropzone p {
+            font-size: 12px;
+            color: #8a8182;
+        }
+        .qr-preview-container {
+            margin-top: 10px;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .qr-preview-container img {
+            max-width: 120px;
+            max-height: 120px;
+            border-radius: 6px;
+            border: 1px solid #fcd1d9;
+        }
+        .btn-remove-qr {
+            position: absolute;
+            top: -5px;
+            right: 120px;
+            background: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 11px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border: none;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            padding: 15px 20px;
+            border-top: 1px solid #fff1f3;
+        }
+
+        .btn-modal-cancel {
+            padding: 9px 15px;
+            background: #f4f4f4;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            color: #666;
+        }
+
+        .btn-modal-submit {
+            padding: 9px 15px;
+            background: #e56b82;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            color: #fff;
+        }
+        .btn-modal-submit:hover { background: #d4566d; }
+    </style>
+</head>
+
+<body>
+    
+    <div id="addCustomerModal" class="custom-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Thêm khách hàng mới</h3>
+                <span class="close-modal-btn" onclick="closeCustomerModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="edit-id" value="">
+                <div class="form-group-item">
+                    <label>Họ và tên:</label>
+                    <input type="text" id="input-name" placeholder="Nguyễn Văn A">
+                </div>
+                <div class="form-group-item">
+                    <label>Số điện thoại (Bắt buộc):</label>
+                    <input type="text" id="input-phone" placeholder="0901234567">
+                </div>
+                <div class="form-group-item">
+                    <label>Số CMND/CCCD:</label>
+                    <input type="text" id="input-cccd" placeholder="079xxxxxxxx">
+                </div>
+                <div class="form-group-item">
+                    <label>Số tiền gốc giải ngân (đ):</label>
+                    <input type="number" id="input-goc" placeholder="0" value="0">
+                </div>
+                <div class="form-group-item">
+                    <label>Số tiền cần thanh toán (đ):</label>
+                    <input type="number" id="input-phaiTT" placeholder="0" value="0">
+                </div>
+                <div class="form-group-item">
+                    <label>Thời hạn thanh toán:</label>
+                    <input type="text" id="input-hanTT" placeholder="Ví dụ: 30 ngày">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-modal-cancel" onclick="closeCustomerModal()">Hủy bỏ</button>
+                <button class="btn-modal-submit" onclick="submitCustomerForm()">Lưu lại</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="configModal" class="custom-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Cấu hình doanh nghiệp & QR</h3>
+                <span class="close-modal-btn" onclick="closeConfigModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group-item">
+                    <label>Ngân hàng:</label>
+                    <input type="text" id="config-bankName" placeholder="Ví dụ: MB Bank (Ngân hàng Quân Đội)">
+                </div>
+                <div class="form-group-item">
+                    <label>Số tài khoản thanh toán:</label>
+                    <input type="text" id="config-bankNumber" placeholder="Nhập số tài khoản doanh nghiệp">
+                </div>
+                <div class="form-group-item">
+                    <label>Tên chủ doanh nghiệp / Người thụ hưởng:</label>
+                    <input type="text" id="config-ownerName" placeholder="Ví dụ: CÔNG TY TNHH MINDONG">
+                </div>
+                <div class="form-group-item">
+                    <label>Hình ảnh mã QR Thanh toán:</label>
+                    <div class="qr-dropzone" id="qr-dropzone" onclick="document.getElementById('config-qrFile').click()">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <p>Kéo thả ảnh QR vào đây hoặc <b>Nhấp để chọn file ảnh</b></p>
+                        <input type="file" id="config-qrFile" accept="image/*" style="display: none;" onchange="handleQrFileSelect(event)">
+                    </div>
+                    <div class="qr-preview-container" id="qr-preview-container">
+                        <button class="btn-remove-qr" onclick="removeSelectedQr(event)">&times;</button>
+                        <img id="qr-preview-img" src="" alt="QR Preview">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-modal-cancel" onclick="closeConfigModal()">Hủy bỏ</button>
+                <button class="btn-modal-submit" onclick="submitConfigForm()">Lưu cấu hình</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <div class="logo-area">
+                <div class="logo-icon"><i class="fa-solid fa-heart"></i></div>
+                <div class="logo-text">
+                    <h1>Mindong</h1>
+                    <span>Quản trị hệ thống</span>
+                </div>
+            </div>
+            <div class="user-nav">
+                 <div class="nav-item" onclick="adminLogout()"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</div>
+            </div>
+        </header>
+
+        <div class="main-banner">
+            <div class="banner-left">
+                <div class="banner-icon"><i class="fa-regular fa-credit-card"></i></div>
+                <div class="banner-title">
+                    <h2>Thông tin thanh toán chung</h2>
+                    <p>Quản lý tài khoản & Mã QR doanh nghiệp</p>
+                </div>
+            </div>
+            <button class="btn-edit-main" onclick="openConfigModal()"><i class="fa-regular fa-pen-to-square"></i> Chỉnh sửa</button>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon icon-pink-light"><i class="fa-solid fa-users"></i></div>
+                <div class="stat-info">
+                    <p>Tổng khách hàng</p>
+                    <h3 id="total-customers">0</h3>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon icon-pink-medium"><i class="fa-solid fa-arrow-up-right-dots"></i></div>
+                <div class="stat-info">
+                    <p>Tổng tiền gốc</p>
+                    <h3 id="total-goc">0 ₫</h3>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon icon-pink-dark"><i class="fa-solid fa-sack-dollar"></i></div>
+                <div class="stat-info">
+                    <p>Tổng phải thanh toán</p>
+                    <h3 id="total-phai-tt" class="text-highlight">0 ₫</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="list-toolbar">
+            <div class="toolbar-title">Danh sách khách hàng</div>
+            <div class="toolbar-buttons">
+                <button class="btn-action btn-muted"><i class="fa-solid fa-file-excel"></i> Upload Excel</button>
+                <button class="btn-action btn-pink" onclick="addCustomerPrompt()"><i class="fa-solid fa-plus"></i> Thêm khách hàng</button>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 60px;">STT</th>
+                        <th>Khách hàng</th>
+                        <th>SĐT</th>
+                        <th>CCCD</th>
+                        <th>Tiền gốc</th>
+                        <th>Phải TT</th>
+                        <th>Hạn TT</th>
+                        <th style="width: 120px; text-align: center;">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody id="customer-table-body">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        let localCustomersArray = [];
+        let globalBase64QrString = ""; // Biến lưu chuỗi dữ liệu ảnh Base64
+
+        document.addEventListener("DOMContentLoaded", function () {
+            loadCustomersFromServer();
+            setupDragAndDrop();
+        });
+
+        function loadCustomersFromServer() {
+            fetch('/api/customers')
+            .then(response => response.json())
+            .then(customerList => {
+                localCustomersArray = customerList;
+                const tbody = document.getElementById("customer-table-body");
+                tbody.innerHTML = ""; 
+
+                let tongKhachHang = customerList.length;
+                let tongTienGoc = 0;
+                let tongPhaiTT = 0;
+
+                if (tongKhachHang === 0) {
+                    tbody.innerHTML = `<tr><td>1</td><td class="empty-placeholder">— Trống —</td><td class="empty-placeholder">— Trống —</td><td class="empty-placeholder">— Trống —</td><td class="empty-placeholder">— Trống —</td><td class="empty-placeholder">— Trống —</td><td class="empty-placeholder">— Trống —</td><td><div class="action-icons" style="justify-content: center;"><i class="fa-regular fa-pen-to-square icon-btn icon-edit" style="opacity: 0.3"></i><i class="fa-regular fa-calendar-days icon-btn icon-calendar" style="opacity: 0.3"></i><i class="fa-regular fa-trash-can icon-btn icon-delete" style="opacity: 0.3"></i></div></td></tr>`;
+                    document.getElementById("total-customers").innerText = "0";
+                    document.getElementById("total-goc").innerText = "0 ₫";
+                    document.getElementById("total-phai-tt").innerText = "0 ₫";
+                    return;
+                }
+
+                customerList.forEach((customer, index) => {
+                    tongTienGoc += Number(customer.goc) || 0;
+                    tongPhaiTT += Number(customer.phaiTT) || 0;
+
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td style="font-weight: 600; color: #4a4a4a;">${customer.name || '—'}</td>
+                        <td><span class="phone-badge">${customer.phone}</span></td>
+                        <td>${customer.cccd || '—'}</td>
+                        <td style="font-weight: 600; color: #2ecc71;">${(Number(customer.goc) || 0).toLocaleString('vi-VN')} ₫</td>
+                        <td style="font-weight: 600; color: #e74c3c;">${(Number(customer.phaiTT) || 0).toLocaleString('vi-VN')} ₫</td>
+                        <td style="font-size: 13px; color: #7f8c8d;">${customer.hanTT || '—'}</td>
+                        <td>
+                            <div class="action-icons" style="justify-content: center;">
+                                <i class="fa-regular fa-pen-to-square icon-btn icon-edit" title="Chỉnh sửa" onclick="editCustomerPrompt(${index})"></i>
+                                <i class="fa-regular fa-calendar-days icon-btn icon-calendar" title="Lên lịch"></i>
+                                <i class="fa-regular fa-trash-can icon-btn icon-delete" title="Xóa" onclick="deleteCustomerFromServer(${customer.id})"></i>
+                            </div>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+
+                document.getElementById("total-customers").innerText = tongKhachHang;
+                document.getElementById("total-goc").innerText = tongTienGoc.toLocaleString('vi-VN') + " ₫";
+                document.getElementById("total-phai-tt").innerText = tongPhaiTT.toLocaleString('vi-VN') + " ₫";
+            })
+            .catch(error => console.error("Lỗi lấy danh sách:", error));
+        }
+
+        function addCustomerPrompt() {
+            document.getElementById("addCustomerModal").style.display = "flex";
+            document.getElementById("modal-title").innerText = "Thêm khách hàng mới";
+            document.getElementById("edit-id").value = "";
+            document.getElementById("input-name").value = "";
+            document.getElementById("input-phone").value = "";
+            document.getElementById("input-cccd").value = "";
+            document.getElementById("input-goc").value = "0";
+            document.getElementById("input-phaiTT").value = "0";
+            document.getElementById("input-hanTT").value = "";
+        }
+
+        function editCustomerPrompt(index) {
+            const customer = localCustomersArray[index];
+            if (!customer) return;
+            document.getElementById("addCustomerModal").style.display = "flex";
+            document.getElementById("modal-title").innerText = "Chỉnh sửa thông tin khách hàng";
+            document.getElementById("edit-id").value = customer.id; 
+            document.getElementById("input-name").value = customer.name || "";
+            document.getElementById("input-phone").value = customer.phone || "";
+            document.getElementById("input-cccd").value = customer.cccd || "";
+            document.getElementById("input-goc").value = customer.goc || 0;
+            document.getElementById("input-phaiTT").value = customer.phaiTT || 0;
+            document.getElementById("input-hanTT").value = customer.hanTT || "";
+        }
+
+        function closeCustomerModal() {
+            document.getElementById("addCustomerModal").style.display = "none";
+        }
+
+        function submitCustomerForm() {
+            const id = document.getElementById("edit-id").value;
+            const name = document.getElementById("input-name").value.trim() || "—";
+            const phone = document.getElementById("input-phone").value.trim();
+            const cccd = document.getElementById("input-cccd").value.trim() || "—";
+            const goc = document.getElementById("input-goc").value || "0";
+            const phaiTT = document.getElementById("input-phaiTT").value || "0";
+            const hanTT = document.getElementById("input-hanTT").value.trim() || "—";
+
+            if (!phone) { alert("Vui lòng nhập Số điện thoại!"); return; }
+            const customerData = { name, phone, cccd, goc, phaiTT, hanTT };
+
+            if (id === "") {
+                fetch('/api/customers', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(customerData)
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) { alert("Đã thêm khách hàng thành công!"); closeCustomerModal(); loadCustomersFromServer(); }
+                    else { alert(data.message || "Lỗi không thể thêm!"); }
+                });
+            } else {
+                fetch(`/api/customers/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(customerData)
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) { alert("Đã cập nhật thành công!"); closeCustomerModal(); loadCustomersFromServer(); }
+                    else { alert(data.message || "Lỗi: Số điện thoại đã tồn tại!"); }
+                });
+            }
+        }
+
+        // =========================================================
+        // XỬ LÝ KÉO THẢ VÀ CẬP NHẬT TÀI KHOẢN CONFIG & QR CODE
+        // =========================================================
+        function openConfigModal() {
+            document.getElementById("configModal").style.display = "flex";
+            fetch('/api/config')
+            .then(res => res.json())
+            .then(data => {
+                if (data) {
+                    document.getElementById("config-bankName").value = data.bankName || "";
+                    document.getElementById("config-bankNumber").value = data.bankNumber || "";
+                    document.getElementById("config-ownerName").value = data.ownerName || "";
+                    
+                    if (data.qrCodeUrl) {
+                        globalBase64QrString = data.qrCodeUrl;
+                        document.getElementById("qr-preview-img").src = data.qrCodeUrl;
+                        document.getElementById("qr-preview-container").style.display = "flex";
+                    } else {
+                        globalBase64QrString = "";
+                        document.getElementById("qr-preview-container").style.display = "none";
+                    }
+                }
+            })
+            .catch(err => console.error("Lỗi lấy cấu hình:", err));
+        }
+
+        function closeConfigModal() {
+            document.getElementById("configModal").style.display = "none";
+        }
+
+        // Đọc file ảnh chuyển sang Base64 văn bản
+        function processQrFile(file) {
+            if (!file || !file.type.match('image.*')) {
+                alert("Vui lòng chỉ chọn tệp tin hình ảnh (png, jpg, jpeg)!");
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                globalBase64QrString = e.target.result; // Chuỗi ảnh Base64 mã hóa hoàn chỉnh
+                document.getElementById("qr-preview-img").src = globalBase64QrString;
+                document.getElementById("qr-preview-container").style.display = "flex";
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function handleQrFileSelect(event) {
+            const file = event.target.files[0];
+            processQrFile(file);
+        }
+
+        function removeSelectedQr(event) {
+            event.stopPropagation();
+            globalBase64QrString = "";
+            document.getElementById("config-qrFile").value = "";
+            document.getElementById("qr-preview-container").style.display = "none";
+        }
+
+        // Thiết lập sự kiện kéo & thả ảnh (Drag and Drop) vào khối div
+        function setupDragAndDrop() {
+            const dropzone = document.getElementById("qr-dropzone");
+            if (!dropzone) return;
+
+            ['dragenter', 'dragover'].forEach(eventName => {
+                dropzone.addEventListener(eventName, (e) => {
+                    e.preventDefault();
+                    dropzone.classList.add('dragover');
+                }, false);
+            });
+
+            ['dragleave', 'drop'].forEach(eventName => {
+                dropzone.addEventListener(eventName, (e) => {
+                    e.preventDefault();
+                    dropzone.classList.remove('dragover');
+                }, false);
+            });
+
+            dropzone.addEventListener('drop', (e) => {
+                const dt = e.dataTransfer;
+                const file = dt.files[0];
+                processQrFile(file);
+            }, false);
+        }
+
+        function submitConfigForm() {
+            const bankName = document.getElementById("config-bankName").value.trim();
+            const bankNumber = document.getElementById("config-bankNumber").value.trim();
+            const ownerName = document.getElementById("config-ownerName").value.trim();
+
+            if (!bankName || !bankNumber || !ownerName) {
+                alert("Vui lòng điền đủ Ngân hàng, Số tài khoản và Tên chủ doanh nghiệp!");
+                return;
+            }
+
+            // Gửi trực tiếp chuỗi Base64 (globalBase64QrString) xuống Database
+            const configData = { bankName, bankNumber, ownerName, qrCodeUrl: globalBase64QrString };
+
+            fetch('/api/config', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(configData)
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Đã lưu thông tin tài khoản và mã QR thành công!");
+                    closeConfigModal();
+                } else {
+                    alert("Lỗi: " + data.message);
+                }
+            })
+            .catch(err => alert("Lỗi kết nối máy chủ!"));
+        }
+
+        function deleteCustomerFromServer(id) {
+            if (!id) return;
+            if (confirm("Bạn có chắc chắn muốn xóa vĩnh viễn khách hàng này không?")) {
+                alert("Yêu cầu xóa khách hàng ID: " + id);
+            }
+        }
+
+        function adminLogout() { window.location.href = 'index.html'; }
+    </script>
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập - Mindong</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: #fcf8f8; /* Nền trắng hồng cực nhẹ nhàng */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #4a4a4a;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 440px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Khu vực Logo & Thương hiệu */
+        .brand-section {
+            margin-bottom: 30px;
+        }
+
+        .logo-box {
+            width: 65px;
+            height: 65px;
+            background-color: #e56b82; /* Màu hồng chủ đạo mượt mà */
+            border-radius: 16px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: 700;
+            box-shadow: 0 8px 20px rgba(229, 107, 130, 0.25);
+            margin-bottom: 12px;
+        }
+
+        .brand-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: #e56b82;
+            letter-spacing: 1px;
+        }
+
+        /* Khung thẻ đăng nhập chính */
+        .login-card {
+            background-color: #ffffff;
+            padding: 35px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(229, 107, 130, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .card-desc {
+            font-size: 12.5px;
+            color: #8c8c8c;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+
+        /* Cấu trúc các ô nhập liệu Form */
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #b3b3b3;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 14px 16px 14px 46px;
+            border: 1px solid #e8e8e8;
+            border-radius: 10px;
+            font-size: 14px;
+            background-color: #fafafa;
+            color: #333333;
+            outline: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .input-field:focus {
+            border-color: #e56b82;
+            background-color: #ffffff;
+            box-shadow: 0 0 0 4px rgba(229, 107, 130, 0.1);
+        }
+
+        .input-field:focus + i {
+            color: #e56b82;
+        }
+
+        /* Nút bấm Submit */
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background-color: #e56b82;
+            border: none;
+            border-radius: 10px;
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            box-shadow: 0 6px 15px rgba(229, 107, 130, 0.2);
+            transition: all 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: #d4566d;
+            box-shadow: 0 8px 20px rgba(229, 107, 130, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .btn-submit:active {
+            transform: translateY(1px);
+        }
+
+        /* Khung thông báo lỗi trực quan */
+        .alert-error {
+            background-color: #fff1f3;
+            color: #e56b82;
+            padding: 12px 15px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            text-align: left;
+            border-left: 4px solid #e56b82;
+            display: none; /* Chỉ hiện khi có lỗi xảy ra */
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Phần chân trang thông tin bảo mật */
+        .security-info {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #a0a0a0;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .security-info i {
+            font-size: 13px;
+            color: #8bc34a;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        
+        <div class="brand-section">
+            <div class="logo-box">M</div>
+            <div class="brand-name">MINDONG</div>
+        </div>
+
+        <div class="login-card">
+            <h2 class="card-title">ĐĂNG NHẬP</h2>
+            <p class="card-desc">Nhập số điện thoại của bạn để đăng nhập và xem thông tin khoản vay</p>
+            
+            <div id="error-box" class="alert-error">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <span id="error-message">Thông báo lỗi</span>
+            </div>
+
+            <form onsubmit="handleLogin(event)">
+                <div class="input-group">
+                    <i class="fa-solid fa-phone"></i>
+                    <input type="tel" id="phone-input" class="input-field" placeholder="Nhập số điện thoại" required pattern="[0-9]{10,11}" oninput="clearError()">
+                </div>
+                <button type="submit" class="btn-submit">ĐĂNG NHẬP</button>
+            </form>
+        </div>
+
+        <div class="security-info">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Thông tin của bạn được mã hóa an toàn</span>
+        </div>
+
+    </div>
+
+    <script>
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const phoneNumber = document.getElementById('phone-input').value.trim();
+            const errorBox = document.getElementById('error-box');
+            const errorMessage = document.getElementById('error-message');
+            
+            errorBox.style.display = 'none';
+            
+            // 1. Kiểm tra nếu là số Admin tối cao thì vào luôn trang quản trị
+            const SUPER_ADMIN = '0702804544';
+            if (phoneNumber === SUPER_ADMIN) {
+                window.location.href = 'admin.html';
+                return;
+            } 
+            
+            // 2. Gửi số điện thoại lên Server NodeJS để so khớp database Neon
+            fetch('/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ phone: phoneNumber })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // ĐÃ SỬA TẠI ĐÂY: Thay thế sessionStorage bằng localStorage để đồng bộ với trang user.html
+                    localStorage.setItem('current_user', JSON.stringify(data.user));
+                    
+                    // Điều hướng sang giao diện người dùng
+                    window.location.href = 'user.html';
+                } else {
+                    errorMessage.innerText = data.message || "Số điện thoại không tồn tại!";
+                    errorBox.style.display = 'flex';
+                }
+            })
+            .catch(error => {
+                console.error("Lỗi:", error);
+                errorMessage.innerText = "Không thể kết nối tới Server Backend!";
+                errorBox.style.display = 'flex';
+            });
+        }
+        
+        // Hàm giúp ẩn thông báo lỗi ngay khi người dùng gõ thay đổi số điện thoại
+        function clearError() {
+            const errorBox = document.getElementById('error-box');
+            if (errorBox.style.display === 'flex') {
+                errorBox.style.display = 'none';
+            }
+        }
+    </script>
+
+</body>
+</html>

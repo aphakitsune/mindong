@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông Tin Khoản Vay - Mindong</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: #fcf8f8; /* Nền trắng hồng nhẹ nhàng của bản cũ */
+            color: #4a4a4a;
+            padding: 20px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Thanh điều hướng/Header giả lập phía trên cùng ảnh */
+        .top-bar {
+            width: 100%;
+            max-width: 500px;
+            height: 4px;
+            background-color: #e56b82;
+            border-radius: 2px;
+            margin-bottom: 25px;
+        }
+
+        .user-container {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        /* Tiêu đề chào mừng */
+        .welcome-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333333;
+            text-align: center;
+            margin-bottom: 25px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Thẻ hiển thị thông tin chính */
+        .info-card {
+            background-color: #ffffff;
+            border-radius: 18px;
+            padding: 25px 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(229, 107, 130, 0.06);
+            margin-bottom: 25px;
+        }
+
+        .card-header {
+            font-size: 14px;
+            font-weight: 700;
+            color: #e56b82;
+            border-bottom: 1px dashed #f2f2f2;
+            padding-bottom: 12px;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Hàng thông tin chi tiết */
+        .info-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid #fafafa;
+            font-size: 13.5px;
+        }
+
+        .info-group:last-of-type {
+            border-bottom: none;
+            padding-bottom: 5px;
+        }
+
+        .info-label {
+            color: #8c8c8c;
+            font-weight: 500;
+        }
+
+        .info-value {
+            color: #333333;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        /* Định dạng đặc biệt cho các giá trị tiền tệ hoặc ngày tháng quan trọng */
+        .highlight-value {
+            color: #e56b82;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        /* Khối Copy Số Tài Khoản */
+        .account-box {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-copy {
+            background-color: #fff1f3;
+            color: #e56b82;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-copy:hover {
+            background-color: #e56b82;
+            color: #ffffff;
+        }
+
+        /* Khu vực QR Code hướng dẫn thanh toán */
+        .qr-section {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #f5f5f5;
+            text-align: center;
+        }
+
+        .qr-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #7c7c7c;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        .qr-image {
+            width: 160px;
+            height: 160px;
+            border: 1px solid #eeeeee;
+            padding: 6px;
+            border-radius: 12px;
+            background-color: #ffffff;
+        }
+
+        /* Nút đăng xuất quay lại màn hình chính */
+        .btn-logout {
+            width: 100%;
+            background-color: #ffffff;
+            color: #8c8c8c;
+            border: 1px solid #e8e8e8;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .btn-logout:hover {
+            color: #e56b82;
+            border-color: #e56b82;
+            background-color: #fff1f3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar"></div>
+
+    <div class="info-container">
+
+        <div class="info-card">
+            <div class="card-header">
+                <div class="icon-box"><i class="fa-solid fa-user"></i></div>
+                Thông tin khách hàng
+            </div>
+            <div class="info-group">
+                <span class="info-label">Tên khách hàng</span>
+                <span class="info-value" id="user-name">—</span>
+            </div>
+            <div class="info-group">
+                <span class="info-label">Số điện thoại</span>
+                <span class="info-value" id="user-phone">—</span>
+            </div>
+            <div class="info-group">
+                <span class="info-label">CMND/CCCD</span>
+                <span class="info-value" id="user-cccd">—</span>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div class="card-header">
+                <div class="icon-box"><i class="fa-solid fa-wallet"></i></div>
+                Thông tin khoản vay
+            </div>
+            <div class="info-group">
+                <span class="info-label">Thời hạn thanh toán</span>
+                <span class="info-value highlight-red" id="user-hanTT">—</span>
+            </div>
+            <div class="info-group">
+                <span class="info-label">Số tiền cần thanh toán</span>
+                <span class="info-value" id="user-phaiTT" style="color: #e74c3c;">—</span>
+            </div>
+            <div class="info-group">
+                <span class="info-label">Số tiền giải ngân (gốc)</span>
+                <span class="info-value" id="user-goc" style="color: #2ecc71;">—</span>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div class="card-header">
+                <div class="icon-box"><i class="fa-solid fa-building-columns"></i></div>
+                Thông tin thanh toán
+            </div>
+            <div class="info-group">
+                <span class="info-label">Số tài khoản thanh toán</span>
+                <div class="account-wrapper">
+                    <span class="info-value" id="account-number" style="color: #e56b82;">—</span>
+                    <button class="btn-copy" onclick="copyAccountNumber()">
+                        <i class="fa-regular fa-copy"></i> Copy
+                    </button>
+                </div>
+            </div>
+            <div class="info-group">
+                <span class="info-label">Ngân hàng</span>
+                <span class="info-value" id="config-bankName">—</span>
+            </div>
+            <div class="info-group">
+                <span class="info-label">Tên chủ doanh nghiệp</span>
+                <span class="info-value" id="config-ownerName">—</span>
+            </div>
+            <div class="qr-section">
+                <div class="qr-label">QUÉT MÃ QR ĐỂ THANH TOÁN</div>
+                <img id="qr-image" src="" alt="Mã QR Thanh Toán" class="qr-image">
+            </div>
+        </div>
+
+        <button onclick="handleLogout()" style="width:100%; padding:12px; margin-top:10px; background-color:#7f8c8d; color:white; border:none; border-radius:8px; font-weight:600; cursor:pointer; font-family:'Montserrat';">
+            <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất hệ thống
+        </button>
+
+    </div>
+
+    <script>
+        // Khi trang User được tải lên
+        document.addEventListener("DOMContentLoaded", function () {
+            // =========================================================
+            // ĐOẠN 1: ĐỔ DỮ LIỆU KHÁCH HÀNG (GIỮ NGUYÊN)
+            // =========================================================
+            const currentUserJson = localStorage.getItem('current_user');
+            
+            if (!currentUserJson) {
+                alert("Vui lòng đăng nhập trước khi xem thông tin!");
+                window.location.href = 'index.html';
+                return;
+            }
+
+            const currentUser = JSON.parse(currentUserJson);
+
+            document.getElementById('user-name').innerText = currentUser.name || "—";
+            document.getElementById('user-phone').innerText = currentUser.phone || "—";
+            document.getElementById('user-cccd').innerText = currentUser.cccd || "—";
+            document.getElementById('user-hanTT').innerText = currentUser.hanTT || "—";
+            
+            if (currentUser.goc) {
+                document.getElementById('user-goc').innerText = `${Number(currentUser.goc).toLocaleString('vi-VN')} ₫`;
+            }
+            if (currentUser.phaiTT) {
+                document.getElementById('user-phaiTT').innerText = `${Number(currentUser.phaiTT).toLocaleString('vi-VN')} ₫`;
+            }
+
+            // =========================================================
+            // ĐOẠN 2: THAY ĐỔI ĐỘNG THÔNG TIN THANH TOÁN TỪ CONFIG DATABASE
+            // =========================================================
+            fetch('/api/config')
+            .then(res => res.json())
+            .then(config => {
+                if (config) {
+                    if (config.bankNumber) {
+                        document.getElementById('account-number').innerText = config.bankNumber;
+                    }
+                    if (config.bankName) {
+                        document.getElementById('config-bankName').innerText = config.bankName;
+                    }
+                    if (config.ownerName) {
+                        document.getElementById('config-ownerName').innerText = config.ownerName;
+                    }
+                    if (config.qrCodeUrl) {
+                        document.getElementById('qr-image').src = config.qrCodeUrl;
+                    }
+                }
+            })
+            .catch(err => {
+                console.error("Lỗi lấy cấu hình thanh toán:", err);
+                document.getElementById('config-bankName').innerText = "Lỗi tải dữ liệu!";
+                document.getElementById('config-ownerName').innerText = "Lỗi tải dữ liệu!";
+            });
+        });
+
+        // Hàm copy số tài khoản thanh toán (Giữ nguyên)
+        function copyAccountNumber() {
+            const accountNumber = document.getElementById('account-number').innerText;
+            navigator.clipboard.writeText(accountNumber).then(() => {
+                alert("Đã sao chép số tài khoản thành công!");
+            }).catch(err => {
+                alert("Không thể sao chép, vui lòng tự copy thủ công.");
+            });
+        }
+
+        // Hàm Đăng xuất (Giữ nguyên)
+        function handleLogout() {
+            localStorage.removeItem('current_user');
+            window.location.href = 'index.html';
+        }
+    </script>
+
+</body>
+</html>

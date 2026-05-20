@@ -1,0 +1,27 @@
+datasource db {
+  provider = "postgresql" // Chỉ giữ duy nhất dòng này, xóa hoàn toàn dòng adapter/url đi bạn nhé!
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Giữ nguyên bảng Customer ở bên dưới
+model Customer {
+  id        Int      @id @default(autoincrement())
+  name      String   
+  phone     String   @unique 
+  cccd      String   
+  goc       Int      
+  phaiTT    Int      
+  hanTT     String   
+  createdAt DateTime @default(now())
+}
+
+model Config {
+  id         Int    @id @default(autoincrement())
+  bankNumber String // Số tài khoản thanh toán
+  bankName   String // Ngân hàng
+  ownerName  String // Tên chủ doanh nghiệp
+  qrCodeUrl  String // Link ảnh mã QR hoặc chuỗi mã QR
+}
