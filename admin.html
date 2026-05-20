@@ -1728,6 +1728,7 @@
         }
 
         // MỚI ĐÃ ĐƯỢC CẬP NHẬT:
+// 6. Hàm xóa khách hàng trực tiếp khỏi Database PostgreSQL đám mây
 function deleteCustomerFromServer(id) {
     if (!id) return;
     
@@ -1740,7 +1741,7 @@ function deleteCustomerFromServer(id) {
         .then(data => {
             if (data.success) {
                 alert("Đã xóa khách hàng thành công khỏi database Neon!");
-                loadCustomersFromServer(); // Tải lại bảng danh sách để cập nhật giao diện
+                loadCustomersFromServer(); // Tải lại bảng danh sách để cập nhật và xóa dòng trên giao diện frontend
             } else {
                 alert(data.message || "Lỗi không thể xóa khách hàng!");
             }
